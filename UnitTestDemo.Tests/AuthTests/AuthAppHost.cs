@@ -1,8 +1,6 @@
 ﻿using System;
 using Funq;
 using ServiceStack.Auth;
-using ServiceStack.Caching;
-using ServiceStack.WebHost.IntegrationTests.Services;
 using System.Collections.Generic;
 using ServiceStack;
 using UnitTestDemo.ServiceInterface;
@@ -30,15 +28,10 @@ namespace UnitTestDemo.Tests.AuthTests
             SetConfig(new HostConfig { WebHostUrl = webHostUrl, DebugMode = true });
 
             Plugins.Add(new AuthFeature(() => new WebSudoAuthUserSession(),
-                GetAuthProviders(), "~/" + IntegrationTest.LoginUrl)
-            {
-                AllowGetAuthenticateRequests = req => true,
-                RegisterPlugins = { new WebSudoFeature() },
-            });
+                GetAuthProviders()));
 
-            container.Register(new MemoryCacheClient());
             userRep = new InMemoryAuthRepository();
-            container.Register<IAuthRepository>(userRep);
+            container.Register<IAuthRepository>(new InMemoryAuthRepository());
 
             if (configureFn != null)
             {
@@ -46,16 +39,14 @@ namespace UnitTestDemo.Tests.AuthTests
             }
 
             CreateUser(1, IntegrationTest.UserName, null, IntegrationTest.Password, new List<string> { "TheRole" }, new List<string> { "ThePermission" });
-            //CreateUser(2, AuthTests.UserNameWithSessionRedirect, null, AuthTests.PasswordForSessionRedirect);
-            //CreateUser(3, null, AuthTests.EmailBasedUsername, AuthTests.PasswordForEmailBasedAccount);
         }
 
         public virtual IAuthProvider[] GetAuthProviders()
         {
             return new IAuthProvider[] { //Www-Authenticate should contain basic auth, therefore register this provider first
                     new BasicAuthProvider(), //Sign-in with Basic Auth
-                    //new CredentialsAuthProvider(), //HTML Form post of UserName/Password credentials
-                    //new CustomAuthProvider()
+                    new CredentialsAuthProvider(), //HTML Form post of UserName/Password credentials
+                    new CustomAuthProvider()
                 };
         }
 
