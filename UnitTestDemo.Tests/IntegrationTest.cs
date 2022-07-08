@@ -46,7 +46,7 @@ public partial class IntegrationTest
         {
             var client = GetClientWithUserPassword();
             var request = new Secured { Name = "test" };
-            var response = client.Send<SecureResponse>(request);
+            var response = client.Send<SecuredResponse>(request);
             Assert.That(response.Result, Is.EqualTo(request.Name));
         }
         catch (WebServiceException webEx)
