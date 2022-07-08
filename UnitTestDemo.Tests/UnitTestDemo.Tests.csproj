@@ -7,19 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="AuthTests\AuthTests.cs" />
-    <Compile Remove="AuthTests\CustomUserSession.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="TestExistingDir\default.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="TestExistingDir\default.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\UnitTestDemo.ServiceInterface\UnitTestDemo.ServiceInterface.csproj" />
     <ProjectReference Include="..\UnitTestDemo.ServiceModel\UnitTestDemo.ServiceModel.csproj" />
 
@@ -33,15 +20,6 @@
 	  <PackageReference Include="ServiceStack.Text" Version="6.*" />
 	  <PackageReference Include="ServiceStack.Client" Version="6.*" />
   <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="6.*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="TestExistingDir\textfile.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TestExistingDir\upload.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

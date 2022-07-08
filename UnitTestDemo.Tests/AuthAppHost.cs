@@ -4,7 +4,6 @@ using ServiceStack.Auth;
 using System.Collections.Generic;
 using ServiceStack;
 using UnitTestDemo.ServiceInterface;
-using UnitTestDemo.Tests2;
 
 namespace UnitTestDemo.Tests.AuthTests
 {
@@ -46,7 +45,6 @@ namespace UnitTestDemo.Tests.AuthTests
             return new IAuthProvider[] { //Www-Authenticate should contain basic auth, therefore register this provider first
                     new BasicAuthProvider(), //Sign-in with Basic Auth
                     new CredentialsAuthProvider(), //HTML Form post of UserName/Password credentials
-                    new CustomAuthProvider()
                 };
         }
 

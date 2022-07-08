@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnitTestDemo.ServiceModel;
 using UnitTestDemo.Tests.AuthTests;
 
-namespace UnitTestDemo.Tests2;
+namespace UnitTestDemo.Tests;
 
 public partial class IntegrationTest
 {
